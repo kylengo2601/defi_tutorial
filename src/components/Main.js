@@ -8,31 +8,31 @@ class Main extends Component {
       <div id="content" className="mt-3">
 
         <table className="table table-borderless text-muted text-center">
-          <thead>
+          <thread>
             <tr>
               <th scope="col">Staking Balance</th>
-              <th scope="col">Reward Balance</th>
+              <th scope="col">Reward balance</th>
             </tr>
-          </thead>
+          </thread>
           <tbody>
             <tr>
-              <td>{window.web3.utils.fromWei(this.props.stakingBalance, 'Ether')} mDAI</td>
+              <td>{window.web3.utils.fromWei(this.props.stakingBalance, 'Ether')} mDai</td>
               <td>{window.web3.utils.fromWei(this.props.dappTokenBalance, 'Ether')} DAPP</td>
             </tr>
           </tbody>
         </table>
 
-        <div className="card mb-4" >
+        <div className="card mb-4">
 
           <div className="card-body">
-
+            
             <form className="mb-3" onSubmit={(event) => {
-                event.preventDefault()
-                let amount
-                amount = this.input.value.toString()
-                amount = window.web3.utils.toWei(amount, 'Ether')
-                this.props.stakeTokens(amount)
-              }}>
+              event.preventDefault()
+              let amount
+              amount = this.input.value.toString()
+              amount = window.web3.utils.toWei(amount, 'Ether')
+              this.props.stakeTokens(amount)
+            }}>
               <div>
                 <label className="float-left"><b>Stake Tokens</b></label>
                 <span className="float-right text-muted">
@@ -43,7 +43,7 @@ class Main extends Component {
                 <input
                   type="text"
                   ref={(input) => { this.input = input }}
-                  className="form-control form-control-lg"
+                  className="form-control form-control-g"
                   placeholder="0"
                   required />
                 <div className="input-group-append">
@@ -65,8 +65,8 @@ class Main extends Component {
                 UN-STAKE...
               </button>
           </div>
-        </div>
 
+        </div>
       </div>
     );
   }

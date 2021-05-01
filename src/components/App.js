@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
+import Navbar from './Navbar'
+import './App.css'
+import Main from './Main'
 import Web3 from 'web3'
 import DaiToken from '../abis/DaiToken.json'
 import DappToken from '../abis/DappToken.json'
 import TokenFarm from '../abis/TokenFarm.json'
-import Navbar from './Navbar'
-import Main from './Main'
-import './App.css'
 
 class App extends Component {
 
@@ -21,6 +21,7 @@ class App extends Component {
     this.setState({ account: accounts[0] })
 
     const networkId = await web3.eth.net.getId()
+    console.log(networkId)
 
     // Load DaiToken
     const daiTokenData = DaiToken.networks[networkId]
@@ -29,18 +30,20 @@ class App extends Component {
       this.setState({ daiToken })
       let daiTokenBalance = await daiToken.methods.balanceOf(this.state.account).call()
       this.setState({ daiTokenBalance: daiTokenBalance.toString() })
-    } else {
+    }
+    else {
       window.alert('DaiToken contract not deployed to detected network.')
     }
 
     // Load DappToken
     const dappTokenData = DappToken.networks[networkId]
-    if(dappTokenData) {
+    if(daiTokenData) {
       const dappToken = new web3.eth.Contract(DappToken.abi, dappTokenData.address)
       this.setState({ dappToken })
       let dappTokenBalance = await dappToken.methods.balanceOf(this.state.account).call()
       this.setState({ dappTokenBalance: dappTokenBalance.toString() })
-    } else {
+    }
+    else {
       window.alert('DappToken contract not deployed to detected network.')
     }
 
@@ -51,7 +54,8 @@ class App extends Component {
       this.setState({ tokenFarm })
       let stakingBalance = await tokenFarm.methods.stakingBalance(this.state.account).call()
       this.setState({ stakingBalance: stakingBalance.toString() })
-    } else {
+    }
+    else {
       window.alert('TokenFarm contract not deployed to detected network.')
     }
 
@@ -67,7 +71,7 @@ class App extends Component {
       window.web3 = new Web3(window.web3.currentProvider)
     }
     else {
-      window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+      window.alert('Non-Ethereum browser detected. You should consider trying Metamask!')
     }
   }
 
@@ -105,7 +109,8 @@ class App extends Component {
     let content
     if(this.state.loading) {
       content = <p id="loader" className="text-center">Loading...</p>
-    } else {
+    }
+    else {
       content = <Main
         daiTokenBalance={this.state.daiTokenBalance}
         dappTokenBalance={this.state.dappTokenBalance}
